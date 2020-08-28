@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class LookAtPlayer : MonoBehaviour
 {
-    public Transform target;
+    [SerializeField] Transform target;
 
-   
-    void Update()
+    private void MoveWithPlayer()
     {
-        transform.LookAt(target);
+        if(target!= null)
+        {
+            float playerX = target.transform.position.x;
+            float cameraY = transform.position.y;
+            float playerZ = target.transform.position.z;
+            Vector3 moveVector = new Vector3(playerX, cameraY, playerZ);
+            transform.position = moveVector;
+        }
+       
+    }
+    private void FixedUpdate()
+    {
+        MoveWithPlayer();
     }
 }
