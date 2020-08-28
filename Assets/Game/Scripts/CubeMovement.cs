@@ -5,11 +5,16 @@ using DG.Tweening;
 
 public class CubeMovement : MonoBehaviour
 {
+    [Header("Move")]
     [SerializeField] float moveTime;
     [SerializeField] float jumpPower;
     [SerializeField] float reloadDelay = 1f;
+
+    [Header("Die")]
     [SerializeField] GameObject dieAnimation;
     [SerializeField] AudioClip dieAudio;
+
+
 
     private bool allowInput;
 
@@ -26,6 +31,14 @@ public class CubeMovement : MonoBehaviour
         AudioManager.Instance.PlaySound(dieAudio);
         Destroy(gameObject, 0.5f);
         SceneLoader.Instance.LoadActiveScene(reloadDelay);
+    }
+    public void MoveFromTeleport(Vector3 finalPoint,float moveTime,float teleportHeight)
+    {
+        float transfomY = transform.position.y;
+        Sequence teleportSequence = DOTween.Sequence();
+        teleportSequence.Append(transform.DOMoveY(teleportHeight, moveTime))
+            .Append(transform.DOMove(finalPoint, moveTime))
+            .Append(transform.DOMoveY(transfomY, moveTime));
     }
     private void PlayDiePartical()
     {

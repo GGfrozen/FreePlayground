@@ -288,7 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxYValue: 0.2
   moveTime: 1
-  waitTime: 1
+  waitTime: 1.5
 --- !u!65 &4044673072086680589
 BoxCollider:
   m_ObjectHideFlags: 0
